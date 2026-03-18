@@ -1,17 +1,3 @@
-# Kubernetes Service for K8s Challenge App
-# =========================================
-# TODO: Complete this service manifest
-#
-# Requirements:
-# - Expose the deployment on port 80
-# - Target the container port 5000
-# - Use NodePort type for local access
-# - Selector must match deployment labels
-#
-# Hints:
-# - See README.md Step 3 for detailed guidance
-# - selector.app must match the pod label
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -19,19 +5,12 @@ metadata:
   labels:
     app: k8s-challenge
 spec:
-  # TODO: Set the service type
-  # Options: ClusterIP (internal only), NodePort (local dev), LoadBalancer (cloud)
-  type: ClusterIP  # Change this to NodePort!
-
-  # TODO: Set the selector to match your deployment's pod labels
+  type: NodePort
   selector:
-    app: CHANGE-ME  # This must match the pod labels!
-
+    app: k8s-challenge
   ports:
-    # TODO: Configure the port mapping
     - name: http
-      port: 80          # Service port (what clients connect to)
-      targetPort: 5000  # Container port (where app listens)
-      # TODO: Add nodePort for external access (only for NodePort type)
-      # nodePort: 30080   # External port (30000-32767)
+      port: 80
+      targetPort: 5000
+      nodePort: 30080
       protocol: TCP
